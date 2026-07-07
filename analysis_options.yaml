@@ -1,0 +1,50 @@
+include: package:flutter_lints/flutter.yaml
+
+
+analyzer:
+
+  exclude:
+
+    - "**/*.g.dart"
+
+    - "**/*.freezed.dart"
+
+
+
+linter:
+
+  rules:
+
+
+    # Style
+
+    prefer_single_quotes: true
+
+    always_declare_return_types: true
+
+    avoid_print: true
+
+
+    # Flutter
+
+    use_key_in_widget_constructors: true
+
+    prefer_const_constructors: true
+
+    prefer_const_literals_to_create_immutables: true
+
+
+    # Safety
+
+    avoid_dynamic_calls: true
+
+    cancel_subscriptions: true
+
+    close_sinks: true
+
+
+    # Clean code
+
+    unnecessary_this: true
+
+    sized_box_for_whitespace: true
