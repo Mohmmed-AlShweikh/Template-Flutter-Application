@@ -1,20 +1,27 @@
+/*
+API
+ ↓
+Model
+ ↓
+Entity
+ ↓
+UI*/
 class HomeEntity {
-
-
+    final int id;
   final String title;
+  final double price;
+  final String image;
 
 
-  final String description;
+  HomeEntity({
 
-
-
-  const HomeEntity({
+    required this.id,
 
     required this.title,
 
-    required this.description,
+    required this.price,
+
+    required this.image,
 
   });
-
-
 }

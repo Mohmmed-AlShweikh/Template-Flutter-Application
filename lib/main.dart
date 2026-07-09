@@ -7,70 +7,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app/app.dart';
 import 'core/providers/storage_provider.dart';
 
-
-
 Future<void> main() async {
-
-
   // Initialize Flutter bindings
-  final widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
-
-
-
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // Keep splash screen visible
-  FlutterNativeSplash.preserve(
-    widgetsBinding: widgetsBinding,
-  );
-
-
-
-  // Load environment file
-  await dotenv.load(
-
-    fileName:
-        const String.fromEnvironment(
-
-          "ENV_FILE",
-
-          defaultValue: ".env.dev",
-
-        ),
-
-  );
-
-
-
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // Initialize SharedPreferences
-  final sharedPreferences =
-      await SharedPreferences.getInstance();
-
-
-
+  final sharedPreferences = await SharedPreferences.getInstance();
   // Remove native splash
   FlutterNativeSplash.remove();
-
-
-
   runApp(
-
     ProviderScope(
-
       overrides: [
-
-        sharedPreferencesProvider.overrideWithValue(
-
-          sharedPreferences,
-
-        ),
-
+        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
       ],
-
-
       child: const MyApp(),
-
     ),
-
   );
-
 }

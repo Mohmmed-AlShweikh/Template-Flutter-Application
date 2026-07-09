@@ -1,50 +1,35 @@
 import '../../domain/entities/home_entity.dart';
 
 
+class ProductModel extends HomeEntity {
 
-class HomeModel extends HomeEntity {
+ 
 
 
-  const HomeModel({
-
+  ProductModel({
+    required super.id,
     required super.title,
-
-    required super.description,
-
+    required super.price,
+    required super.image,
   });
 
 
 
-  factory HomeModel.fromJson(
-      Map<String,dynamic> json,
-      ){
+  factory ProductModel.fromJson(
+      Map<String, dynamic> json,
+      ) {
 
-    return HomeModel(
+    return ProductModel(
 
-      title:
-          json['title'] ?? "",
+      id: json['id'],
 
+      title: json['title'],
 
-      description:
-          json['description'] ?? "",
+      price: (json['price'] as num).toDouble(),
+
+      image: json['thumbnail'],
 
     );
-
   }
-
-
-
-  Map<String,dynamic> toJson(){
-
-    return {
-
-      "title": title,
-
-      "description": description,
-
-    };
-
-  }
-
 
 }

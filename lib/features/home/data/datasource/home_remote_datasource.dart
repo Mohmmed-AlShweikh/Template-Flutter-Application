@@ -4,39 +4,16 @@ import '../../../../core/network/dio_client.dart';
 
 import '../models/home_model.dart';
 
-
-
 class HomeRemoteDatasource {
-
-
   final DioClient dioClient;
 
+  HomeRemoteDatasource(this.dioClient);
 
+  Future<List<ProductModel>> getProducts() async {
+    final response = await dioClient.get("/products");
 
-  HomeRemoteDatasource(
-    this.dioClient,
-  );
+    final List products = response.data['products'];
 
-
-
-  Future<HomeModel> getHomeData() async {
-
-
-    final Response response =
-        await dioClient.get(
-          "/home",
-        );
-
-
-
-    return HomeModel.fromJson(
-
-      response.data,
-
-    );
-
-
+    return products.map((e) => ProductModel.fromJson(e)).toList();
   }
-
-
 }

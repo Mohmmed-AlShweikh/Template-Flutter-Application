@@ -7,21 +7,15 @@ import '../../domain/entities/home_entity.dart';
 import '../../domain/usecases/get_home_data_usecase.dart';
 
 final homeDatasourceProvider = Provider<HomeRemoteDatasource>((ref) {
-  return HomeRemoteDatasource(
-    ref.read(dioProvider),
-  );
+  return HomeRemoteDatasource(ref.read(dioProvider));
 });
 
 final homeRepositoryProvider = Provider<HomeRepository>((ref) {
-  return HomeRepository(
-    ref.read(homeDatasourceProvider),
-  );
+  return HomeRepository(ref.read(homeDatasourceProvider));
 });
 
-final homeProvider = FutureProvider<HomeEntity>((ref) async {
-  final useCase = GetHomeDataUseCase(
-    ref.read(homeRepositoryProvider),
-  );
+final homeProvider = FutureProvider<List<HomeEntity>>((ref) async {
+  final useCase = GetHomeDataUseCase(ref.read(homeRepositoryProvider));
 
   return useCase();
 });

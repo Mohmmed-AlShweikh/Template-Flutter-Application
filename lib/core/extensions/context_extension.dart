@@ -1,51 +1,21 @@
 import 'package:flutter/material.dart';
 
-
 extension ContextExtension on BuildContext {
+  Size get screenSize => MediaQuery.sizeOf(this);
 
+  double get screenWidth => screenSize.width;
 
-  Size get screenSize =>
-      MediaQuery.sizeOf(this);
+  double get screenHeight => screenSize.height;
 
+  bool get isMobile => screenWidth < 600;
 
+  bool get isTablet => screenWidth >= 600;
 
-  double get screenWidth =>
-      screenSize.width;
+  bool get isLandscape => screenWidth > screenHeight;
 
+  bool get isPortrait => screenHeight > screenWidth;
 
+  ThemeData get theme => Theme.of(this);
 
-  double get screenHeight =>
-      screenSize.height;
-
-
-
-  bool get isMobile =>
-      screenWidth < 600;
-
-
-
-  bool get isTablet =>
-      screenWidth >= 600;
-
-
-
-  bool get isLandscape =>
-      screenWidth > screenHeight;
-
-
-
-  bool get isPortrait =>
-      screenHeight > screenWidth;
-
-
-
-  ThemeData get theme =>
-      Theme.of(this);
-
-
-
-  TextTheme get textTheme =>
-      Theme.of(this).textTheme;
-
-
+  TextTheme get textTheme => Theme.of(this).textTheme;
 }

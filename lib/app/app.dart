@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_production_template/app/localization/app_localization_delegate.dart';
 import 'package:flutter_production_template/app/localization/locale_provider.dart';
 import 'package:flutter_production_template/app/theme/theme_provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,98 +9,42 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'router/app_router.dart';
 import 'theme/app_theme.dart';
 
-
 class MyApp extends ConsumerWidget {
-
-  const MyApp({
-    super.key,
-  });
-
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
     return ScreenUtilInit(
-
       // Base design size
-      designSize: const Size(
-        375,
-        812,
-      ),
-
-
+      designSize: const Size(375, 812),
       minTextAdapt: true,
-
       splitScreenMode: true,
-
-
-      builder: (
-        context,
-        child,
-      ) {
-
-
+      builder: (context, child) {
         return MaterialApp.router(
-
           debugShowCheckedModeBanner: false,
-           locale:
-      ref.watch(localeProvider),
-
-
-  supportedLocales: const [
-
-    Locale("en"),
-
-    Locale("ar"),
-
-  ],
-
-
-  theme: AppTheme.lightTheme,
-
-
-  darkTheme: AppTheme.darkTheme,
-
-
-  routerConfig: AppRouter.router,
-
-          title: "Flutter Template",
-
-
-       
-
+          locale: ref.watch(localeProvider),
+          localizationsDelegates: const [
+            AppLocalizationDelegate(),
+              GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('en'), Locale('ar')],
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          routerConfig: AppRouter.router,
           themeMode: ref.watch(themeProvider),
-
-
-        
-
-
-          builder: (
-            context,
-            widget,
-          ) {
-
-
+          builder: (context, widget) {
             return MediaQuery(
-
               data: MediaQuery.of(context).copyWith(
-
                 // Prevent huge text scaling
-                textScaler: const TextScaler.linear(
-                  1.0,
-                ),
-
+                textScaler: const TextScaler.linear(1.0),
               ),
-
               child: widget!,
             );
           },
-
         );
-
       },
-
     );
   }
 }
